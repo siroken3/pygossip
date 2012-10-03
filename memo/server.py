@@ -12,7 +12,7 @@ wlist=[]
 xlist=[]
 
 while 1:
-#    rs, ws, xs = select.select(rlist, wlist, xlist)
-#    for s in rs:
-    data, addr = s.recvfrom(1024)
-    pprint.pprint((data, addr))
+    rs, ws, xs = select.select([s], wlist, xlist)
+    for s in rs:
+        data, addr = s.recvfrom(1024)
+        pprint.pprint((data, addr))
