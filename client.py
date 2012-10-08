@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import socket
+
 class Client:
-    __memberList
-    __deadList
+    __memberList = []
+    __deadList = []
     __t_gossip
     __t_cleanup
     __random
@@ -11,7 +13,9 @@ class Client:
     __me
 
     def __init__(self):
-        pass()
+        __t_gossip = 1000
+        __t_cleanup = 10000
+        __myAddress = socket.gethostbyname('localhost')
 
     def parseStartupMembers(self):
         pass()
