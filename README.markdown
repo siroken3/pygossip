@@ -1,4 +1,4 @@
-= pygossip
+# pygossip
 
 This is a porting of Java implementation.
 
