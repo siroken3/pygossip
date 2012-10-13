@@ -29,8 +29,8 @@ class Member:
     heartbeat = property(getHeartbeat, setHeartbeat)
 
     def __eq__(self):
-        pass()
+        pass
 
     def __hash__(self):
-        pass()
+        pass
 
