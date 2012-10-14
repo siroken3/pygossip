@@ -3,7 +3,10 @@
 import sys
 import socket
 import random
+import pickle
 import threading
+import member
+import time
 
 class Client:
 #    __random
@@ -64,16 +67,22 @@ class Client:
             self.__keepRunning = true
 
         def run(self):
-            pass
+            while self.__keepRunning:
+                time.sleepTime(self.__t_gossip)
+                self.sendMembershipList()
 
-    class AsynchronousReceiver:
+    class AsynchronousReceiver(threading.Thread):
         def __init__(self):
-            pass
+            threading.Thread.__init__(self)
+            self.__keepRunning = true
 
         def run(self):
-            pass
+            while self.__keepRunning:
+                buf, addr = self.__server.recvfrom(2048)
+                remotelist = pickle.loads(buf)
+                self.mergeLists(remotelist)
 
-        def mergeLists(self):
+        def mergeLists(self, remoteList):
             pass
 
     def start(self):
@@ -84,5 +93,5 @@ class Client:
         pass
 
 if __name__ == '__main__':
-    client = Client()
+    client = Client(("localhosr",0))
     client.start()
