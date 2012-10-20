@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import timeouttimer
+
 class Member:
-    __address
-    __heartbeat
-    __timeouttimer
 
     def __init__(self, address, heartbeat, client, t_cleanup):
         self.__address = address
         self.__heartbeat = heartbeat
-        self.__timeouttimer = TimeoutTimer(t_cleanup=t_cleanup, client=client, source=self)
+        self.__timeouttimer = timeouttimer.TimeoutTimer(sleepTime=t_cleanup, client=client, member=self)
 
     def startTimeoutTimer(self):
         self.__timeouttimer.start()
@@ -28,9 +27,12 @@ class Member:
 
     heartbeat = property(getHeartbeat, setHeartbeat)
 
-    def __eq__(self):
-        pass
+    def __eq__(self, other):
+        return self.__address == other,__address
 
-    def __hash__(self):
-        pass
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __repr__(self):
+        return str(self.__address[0]) + ":" + str(self.__address[1])
 
